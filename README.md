@@ -1,6 +1,6 @@
 ELS
 ====
-** Tool for lattice matching of crystalline materials.
+**Tool for lattice matching of crystalline materials.**
 
 Contents
 ---------
@@ -31,5 +31,6 @@ ELS Python code and original data tables are licensed under the GNU General Publ
 References
 ------------
 [Keith T Butler, Yu Kumagai, Fumiyasu Oba, Aron Walsh,
-Screening procedure for structurally and electronically matched contact layers for high-performance solar cells: hybrid perovskites, * J. Mater. Chem. C* 2016](http://pubs.rsc.org/en/content/articlehtml/2016/tc/c5tc04091d)
+Screening procedure for structurally and electronically matched contact layers for high-performance solar cells: hybrid perovskites, *J. Mater. Chem. C* 2016](http://pubs.rsc.org/en/content/articlehtml/2016/tc/c5tc04091d)
+
 [A. Zur, T.C. McGill "Lattice match: An application to heteroepitaxy" *J. Appl. Phys.* 1984](http://scitation.aip.org/content/aip/journal/jap/55/2/10.1063/1.333084)

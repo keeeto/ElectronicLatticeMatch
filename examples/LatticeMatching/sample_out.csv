@@ -1,0 +1,3 @@
+Material 1,Material 2,Surface 1,Surface 2,Multiplicity 1,Multiplicity 2,Maximum strain,Angle strain
+ZnO,ZnS,"(1, 0, 0)","(1, 1, 0)","(5, 3)","(3, 2)","(1, 1, 0)",0.011884823595748297,0.0
+ZnO,ZnS,"(1, 1, 1)","(1, 1, 0)","(5, 5)","(5, 4)","(1, 1, 0)",0.03229315390939842,0.4768609077007684

@@ -1,0 +1,5 @@
+Example of lattice matching of two structures
+
+python LatticeMatch.py -a ZnO.cif -b ZnS.cif
+
+Should produce a file the same as sample_out.csv - it will be cassle ZnO.csv

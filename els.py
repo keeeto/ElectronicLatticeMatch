@@ -1,9 +1,15 @@
 import ase.build.general_surface as surface
 import numpy as np
 import math
+import surface_points 
+import os
+from os import path
+
+module_directory = path.abspath(path.dirname(__file__))
+data_directory = path.join(module_directory, 'data')
 
 
-ef find_max_csl(surfs_1,surfs_2,multiplicity1,multiplicity2):
+def find_max_csl(surfs_1,surfs_2,multiplicity1,multiplicity2):
     '''
 	Given surface points and multiplicities of the surfaces this returns the maximal overlap fraction of the sites
 	Attr:
@@ -91,7 +97,7 @@ def energy_align(ip_a, ea_a, window=0.6, gap=3.):
 	    conducting_HTL: Hole withdrawing contact layers.
     '''
 
-    f = open('CollatedData.txt','r')
+    f = open(os.path.join(data_directory,"CollatedData.txt"),'r')
     lines = f.readlines()
     f.close()
 

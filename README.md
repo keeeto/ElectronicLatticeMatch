@@ -5,11 +5,10 @@ ELS
 Contents
 ---------
 
-* LatticeMatch.py : script for matching lattice parameters of two .cif files.
-* ElectronEnergies.dat : Data on IPs and EAs of > 100 semiconductors collated from various sources.
-* scan_IP_EA.py : script for scanning band-offsets, based on Anderson's rule.
-* SiteMatch.py : script for performing the site matching routines of lattice matched surfaces.
+* els.py : contains the routines for mathcing bands, lattices and atomic sites.
 * surface_points.py : the information on the surface atomic coordinates for a selcted number of materials.
+* examples : directory with examples of the use of the scripts
+    * CdTe: example looking for hole transport layers for CdTe
 
 Requirements
 -----------

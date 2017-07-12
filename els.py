@@ -84,13 +84,14 @@ def translate(surface,T):
 def get_comma_separated_args(option, opt, value, parser):
     setattr(parser.values, option.dest, value.split(','))
 
-def energy_align(ip_a, ea_a, window=0.6, gap=3.):
+def energy_align(ip_a, ea_a, window_up=0.4, window_down=0.1, gap=3.):
     '''
         A function to return band aligned contacts for electrons and holes. It can also check if contacts migh be semiconductors, based on their band gap.
 	Args:
 	    ip_a: The ionisation potential of the absorber layer.
 	    ea_a: The electron affinity of the absorber layer.
-   	    window: Double the maximim band offset allowed.
+   	    window_up: The maximim positive band offset allowed.
+   	    window_up: The maximim negative band offset allowed.
 	    gap: The cutoff bandgap, above which the contact is considered insulating.
         Returns:
 	    conducting_ETL: Electron withdrawing contact layers.
@@ -113,12 +114,12 @@ def energy_align(ip_a, ea_a, window=0.6, gap=3.):
             EA = float(inp[2])
             IP = float(inp[3])
             if Eg > 2.0:
-                if EA >= ea_a - window * 0.5 and EA <= ea_a + window * 0.5:
+                if EA >= ea_a - window_up and EA <= ea_a + window_down:
                     ETL.append(inp[0])
                     if Eg < gap:
                         conducting_ETL.append(inp[0])
             if Eg > 2.0:
-                if IP <= ip_a + window * 0.5 and IP >= ip_a - window * 0.5:
+                if IP <= ip_a + window_down and IP >= ip_a - window_up:
                     if Eg < gap:
                         conducting_HTL.append(inp[0])
 

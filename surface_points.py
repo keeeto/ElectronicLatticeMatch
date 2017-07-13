@@ -27,7 +27,7 @@ The function has a list called 'exists', this contains all surfaces for which su
 
 Each dictionary item contains a list of the surface cuts and must end with an empty tuple, note the ,() at the end of each item.
 '''
-from __future__ import print
+from __future__ import print_function
 
 def anatase(miller):
     exists = ['001','010','110','100','101']

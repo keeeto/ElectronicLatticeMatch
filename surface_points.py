@@ -27,6 +27,7 @@ The function has a list called 'exists', this contains all surfaces for which su
 
 Each dictionary item contains a list of the surface cuts and must end with an empty tuple, note the ,() at the end of each item.
 '''
+from __future__ import print
 
 def anatase(miller):
     exists = ['001','010','110','100','101']
@@ -40,7 +41,7 @@ def anatase(miller):
 
         return surfaces[miller]
     else:
-	print "No non-polar surface",miller,"is currently in the database, maybe you want to add it."
+	print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
 	return  []
 
 def TiO2a(miller):

@@ -41,7 +41,7 @@ def anatase(miller):
 
         return surfaces[miller]
     else:
-        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it."))
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def TiO2a(miller):
@@ -55,7 +55,7 @@ def TiO2a(miller):
         surfaces['101'] = ([0.,0.17],[0.5,0.12],[0.,0.37],[0.,0.62],[0.5,0.67],[0.5,0.87]),([0.,0.14],[0.,0.34],[0.5,0.68],[0.5,0.84]),([0.,0.15],[0.,0.36],[0.5,0.4],[0.,0.57],[0.5,0.65],[0.5,0.86],[0.,0.9]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it."))
+        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def WO3(miller):

@@ -11,24 +11,24 @@ data_directory = path.join(module_directory, 'data')
 
 def find_max_csl(surfs_1,surfs_2,multiplicity1,multiplicity2):
     '''
-	Given surface points and multiplicities of the surfaces this returns the maximal overlap fraction of the sites
-	Attr:
-	surfs : lists of the surface points on each side of the interface.
-	multiplicity : lists of the multiplicity of the lattice vectors of u and v for each side of the interface.
-	Returns:
-	max_csl : float, the maximum fraction overlap found.
+        Given surface points and multiplicities of the surfaces this returns the maximal overlap fraction of the sites
+        Attr:
+        surfs : lists of the surface points on each side of the interface.
+        multiplicity : lists of the multiplicity of the lattice vectors of u and v for each side of the interface.
+        Returns:
+        max_csl : float, the maximum fraction overlap found.
     '''
     csl_values = []
     for surface_1 in surfs_1:
         if len(surface_1) > 0:
             surf_1_super = super_surface(np.asarray(surface_1),np.asarray(multiplicity1))
             for surface_2 in surfs_2:
-	        if len(surface_2) > 0:
+                if len(surface_2) > 0:
                     surf_2_super = super_surface(np.asarray(surface_2),np.asarray(multiplicity2))
-	            for i in np.arange(0,1,0.1):
-    	                for j in np.arange(0,1,0.1):
-        	            t_surf = translate(surf_2_super,[i,j])
-		            csl_values.append(csl(surf_1_super,t_surf,multiplicity1))
+                    for i in np.arange(0,1,0.1):
+                        for j in np.arange(0,1,0.1):
+                            t_surf = translate(surf_2_super,[i,j])
+                            csl_values.append(csl(surf_1_super,t_surf,multiplicity1))
 
     return max(csl_values)
 
@@ -38,7 +38,7 @@ def super_surface(surface,multiplicity):
     surf_super = []
     for site in surface:
         for u in range(1,multiplicity[0]+1):
-	    for v in range(1,multiplicity[1]+1):
+            for v in range(1,multiplicity[1]+1):
                 surf_super.append([(site[0]+(u-1))/multiplicity[0],(site[1]+(v-1))/multiplicity[1]])
     return np.asarray(surf_super)
 
@@ -49,7 +49,7 @@ def distance(a,b,mult):
         d1 = d1 - 1
     d2 = abs(a[1] - b[1])
     if d2 > 1:
-	d2 = d2 - 1
+        d2 = d2 - 1
 
     return np.sqrt((d1*mult[0])**2 + (d2*mult[1])**2)
 
@@ -57,28 +57,28 @@ def csl(surface1,surface2,mult_a,tol=0.15):
     '''Takes two surfaces and calculates the number of co-inciding sites (within a tolerance)'''
     coincidence = 0.
     for site_a in surface1:
-	for site_b in surface2:
-	    if distance(site_a,site_b,mult_a) <=  tol:
-		coincidence = coincidence + 1.
+        for site_b in surface2:
+            if distance(site_a,site_b,mult_a) <=  tol:
+                coincidence = coincidence + 1.
     return coincidence*2/(len(surface1)+len(surface2))
 
 def wrapped(site):
     '''Crude minimum image for this code'''
     if site[0] > 1:
-	site[0] = site[0] - 1
+        site[0] = site[0] - 1
     if site[1] > 1:
-	site[1] = site[1] - 1
+        site[1] = site[1] - 1
     if site[0] < 0:
-	site[0] = site[0] + 1
+        site[0] = site[0] + 1
     if site[1] < 0:
-	site[1] = site[1] + 1
+        site[1] = site[1] + 1
     return site
 
 def translate(surface,T):
     '''Translate the positions of the ions by a given vector'''
     for i, site in enumerate(surface):
-	site = wrapped(site + T)
-	surface[i] = site
+        site = wrapped(site + T)
+        surface[i] = site
     return surface
 
 def get_comma_separated_args(option, opt, value, parser):
@@ -87,15 +87,15 @@ def get_comma_separated_args(option, opt, value, parser):
 def energy_align(ip_a, ea_a, window_up=0.4, window_down=0.1, gap=3.):
     '''
         A function to return band aligned contacts for electrons and holes. It can also check if contacts migh be semiconductors, based on their band gap.
-	Args:
-	    ip_a: The ionisation potential of the absorber layer.
-	    ea_a: The electron affinity of the absorber layer.
-   	    window_up: The maximim positive band offset allowed.
-   	    window_up: The maximim negative band offset allowed.
-	    gap: The cutoff bandgap, above which the contact is considered insulating.
+        Args:
+            ip_a: The ionisation potential of the absorber layer.
+            ea_a: The electron affinity of the absorber layer.
+            window_up: The maximim positive band offset allowed.
+            window_up: The maximim negative band offset allowed.
+            gap: The cutoff bandgap, above which the contact is considered insulating.
         Returns:
-	    conducting_ETL: Electron withdrawing contact layers.
-	    conducting_HTL: Hole withdrawing contact layers.
+            conducting_ETL: Electron withdrawing contact layers.
+            conducting_HTL: Hole withdrawing contact layers.
     '''
 
     f = open(os.path.join(data_directory,"CollatedData.txt"),'r')
@@ -227,9 +227,9 @@ def reduce_vectors(va, vb):
     '''Reduce the surface vectors to their minimal cell, as outlined in figure 2 of
     J. Appl. Phys. 55, 380 (1984)
     Args:
-	va,vb: lists of real numbers/integers. Minimum length 2
+        va,vb: lists of real numbers/integers. Minimum length 2
     Returns:
-	a,b: arrays of dimension (2x1). The reduced vectors
+        a,b: arrays of dimension (2x1). The reduced vectors
 
     '''
     a = np.asarray(va[0:2])
@@ -248,11 +248,11 @@ def reduce_vectors(va, vb):
 
 def surface_vectors(lattice, miller):
     ''' Given the xtal as defined with a (3x3) cell uses the ase surface module to cut the required surface.
-	Args:
-	    lattice : ase Atoms object
-	    miller  : miller indices of the surface, a tuple of integers, length 3.
-	Returns:
-	    vectors[0/1] : the surface vectors (u,v), list of real numbers.
+        Args:
+            lattice : ase Atoms object
+            miller  : miller indices of the surface, a tuple of integers, length 3.
+        Returns:
+            vectors[0/1] : the surface vectors (u,v), list of real numbers.
     '''
     surf = surface.surface(lattice, miller, layers=1)
     vectors = surf.cell[0:2]
@@ -261,13 +261,13 @@ def surface_vectors(lattice, miller):
 
 def surface_ratios(surface_a, surface_b, threshold=0.05, limit=5):
     ''' Given two surfaces a and b defined by vectors (u,v) tests to see if there is a ratio of r1/r2 which gives a lattice vector with mismatch less than the threshold.
-	Args:
-	    surfaces_ : the surface vectors and angle. A (3) tuple of real numbers.
-	    threshold : the limit for lattice mismatch.
-	    limit : the maximum number to multiply lattices by to obtain match.
-	Returns:
-	    exists : a bool of wheter the match was found
-	    multiplicity : a list (1x2) with the integer values to multiply by.
+        Args:
+            surfaces_ : the surface vectors and angle. A (3) tuple of real numbers.
+            threshold : the limit for lattice mismatch.
+            limit : the maximum number to multiply lattices by to obtain match.
+        Returns:
+            exists : a bool of wheter the match was found
+            multiplicity : a list (1x2) with the integer values to multiply by.
     '''
 
     epitaxy = False

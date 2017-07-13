@@ -55,7 +55,7 @@ def TiO2a(miller):
         surfaces['101'] = ([0.,0.17],[0.5,0.12],[0.,0.37],[0.,0.62],[0.5,0.67],[0.5,0.87]),([0.,0.14],[0.,0.34],[0.5,0.68],[0.5,0.84]),([0.,0.15],[0.,0.36],[0.5,0.4],[0.,0.57],[0.5,0.65],[0.5,0.86],[0.,0.9]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def WO3(miller):
@@ -66,7 +66,7 @@ def WO3(miller):
         surfaces['110'] = ([0.5,0.3],[0.75,0.3],[1.0,0.8],[0.75,0.80]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def perovskite(miller):
@@ -78,7 +78,7 @@ def perovskite(miller):
         surfaces['110'] = ([0.,0.],[0.,0.5],[0.75,0.5]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def CH3NH3PbI3(miller):
@@ -90,7 +90,7 @@ def CH3NH3PbI3(miller):
         surfaces['110'] = ([0.,0.],[0.,0.5],[0.75,0.5]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def SrTiO3(miller):
@@ -102,7 +102,7 @@ def SrTiO3(miller):
         surfaces['110'] = ([0.,0.],[0.,0.5],[0.75,0.5]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def zincblende(miller):
@@ -113,7 +113,7 @@ def zincblende(miller):
         surfaces['110'] = ([0.25,0.9],[0.25,0.4],[0.5,0.7],[0.5,0.2]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
   
 def CuIz(miller):
@@ -126,7 +126,7 @@ def CuIz(miller):
         surfaces['011'] = ([0.25,0.9],[0.25,0.4],[0.5,0.7],[0.5,0.2]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
   
 def rocksalt(miller):
@@ -139,7 +139,7 @@ def rocksalt(miller):
         surfaces['011'] = ([0.,0.],[0.,0.5],[0.5,0.],[0.5,0.5]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def ZnTe(miller):
@@ -152,7 +152,7 @@ def ZnTe(miller):
         surfaces['011'] = ([0.,0.],[0.,0.5],[0.5,0.],[0.5,0.5]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def bixybite(miller):
@@ -162,7 +162,7 @@ def bixybite(miller):
         surfaces['100'] = ([0.2,0.9],[0.6,0.9],[0.9,0.6],[0.4,0.4],[0.9,0.4],[0.7,0.1]),([0.2,0.2],[0.2,0.7],[0.7,0.2],[0.7,0.7],[0.0,0.3],[0.3,0.5],[0.8,0.5],[0.5,0.8]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def rutile(miller):
@@ -175,7 +175,7 @@ def rutile(miller):
         surfaces['011'] = ([0.0,0.7],[0.3,0.9],[0.2,0.4],[0.5,0.2]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def MoO3(miller):
@@ -186,7 +186,7 @@ def MoO3(miller):
         surfaces['101'] = ([0.25,1.0],[0.75,0.7],[0.75,0.66],[0.25,0.5],[0.75,0.3],[0.25,0.1]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
  
 def wurtzite(miller):
@@ -198,7 +198,7 @@ def wurtzite(miller):
         surfaces['110'] = ([0,0.8],[0.37,0.8],[0.5,0.17],[0.87,0.17]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
     
 def GaN(miller):
@@ -210,7 +210,7 @@ def GaN(miller):
         surfaces['110'] = ([0,0.8],[0.37,0.8],[0.5,0.17],[0.87,0.17]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
     
 def SiC(miller):
@@ -222,7 +222,7 @@ def SiC(miller):
         surfaces['110'] = ([0,0.8],[0.37,0.8],[0.5,0.17],[0.87,0.17]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def Cu2O(miller):
@@ -235,7 +235,7 @@ def Cu2O(miller):
         surfaces['011'] = ([0.,0.],),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def In2S3(miller):
@@ -246,7 +246,7 @@ def In2S3(miller):
         surfaces['010'] = ([0.5,0.],[0.75,0.2],[0.25,0.2],[0.75,0.25],[0.75,0.3],[0.25,0.3],[0.,0.45],[0.75,0.5],[0.25,0.5],[0.75,0.6,0.25,0.6],[0.75,0.66],[0.25,0.66],[0.5,0.7],[0.,0.8],[0.25,0.84],[0.75,0.84],[0.75,0.92],[0.75,0.92]),()
         return  surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
         
 
@@ -257,7 +257,7 @@ def MnTiO3(miller):
         surfaces['010'] = ([0.6,0.1],[0.9,0.15],[0.2,0.25],[0.9,0.36],[0.52,0.42],[0.25,0.58],[0.9,0.64],[0.6,0.75],[0.9,0.85],[0.23,0.9]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def ZnTiO3(miller):
@@ -267,7 +267,7 @@ def ZnTiO3(miller):
         surfaces['011'] = ([0.45,0.09],[0.30,0.45],[0.82,0.26],[0.97,0.60],[0.73,0.82]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def SnS2(miller):
@@ -277,7 +277,7 @@ def SnS2(miller):
         surfaces['100'] = ([0.0,0.0],),([0.67,0.33],),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def Ce2O3(miller):
@@ -287,7 +287,7 @@ def Ce2O3(miller):
         surfaces['101'] = ([0.69,0.54],),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def LiNbO3(miller):
@@ -297,7 +297,7 @@ def LiNbO3(miller):
         surfaces['010'] = ([0.60,0.90],[0.89,0.83],[0.19,0.73],[0.89,0.61],[0.51,0.57],[0.21,0.40],[0.89,0.33],[0.58,0.23],[0.89,0.11],[0.28,0.07]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []
 
 def Ce2S3(miller):
@@ -310,5 +310,5 @@ def Ce2S3(miller):
         surfaces['010'] = ([0.73,0.04],[0.13,0.07],[0.85,0.22],[0.35,0.28],[0.23,0.46],[0.63,0.43],[0.99,0.61],[0.36,0.70],[0.86,0.80],[0.49,0.89]),()
         return surfaces[miller]
     else:
-        print(No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
+        print("No non-polar surface",miller,"is currently in the database, maybe you want to add it.")
         return  []

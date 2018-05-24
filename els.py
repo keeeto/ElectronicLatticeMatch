@@ -126,6 +126,83 @@ def energy_align(ip_a, ea_a, window_up=0.4, window_down=0.1, gap=3.):
     return conducting_ETL, conducting_HTL
 
 
+
+# Extra functions for Suzy's workflow ---------------------------------------------------------------------------------------------
+
+def CBO_scan(EA_ab, lowlim, uplim, gap=3.):
+    # Function to scan for CB offsets for p-type absorbers
+    # Arguments: 
+    ### electron affinity of absorber
+    ### lower limit for offset
+    ### upper limit for offset
+    ### cut-off band gap (above which junction partner discounted as an insulator)
+
+    # Reading in Eg, EA and IP of junction partner candidates
+    f = open(os.path.join(data_directory,"CollatedData.txt"),'r')
+    lines = f.readlines()
+    f.close()
+
+    ETL = []
+    conducting_ETL = []
+    full_line = []
+
+    print("Species, Eg, EA, IP")
+    for line in lines:
+        inp = line.split()
+        if inp[0] != "Species":
+            Eg = float(inp[1])
+            EA = float(inp[2])
+            IP = float(inp[3])
+            # Only consider candidates junction partners that are NOT also solar absorbers (i.e. wider band gap)
+            if Eg > 2.0:
+                if EA_ab - EA >= lowlim and EA_ab - EA <= uplim:
+                    ETL.append(inp[0])
+                    # Only add candidates to final list if band gap less than threshold considered as insulators
+                    if Eg < gap:
+                        conducting_ETL.append(inp[0])
+                        full_line.append(line)
+    return full_line
+
+
+
+def VBO_scan(IP_ab, lowlim, uplim, gap=3.):
+    # Function to scan for VB offsets for n-type absorbers
+    # Arguments: 
+    ### ionisation potential of absorber
+    ### lower limit for offset
+    ### upper limit for offset
+    ### cut-off band gap (above which junction partner discounted as an insulator)
+
+    # Reading in Eg, EA and IP of junction partner candidates
+    f = open(os.path.join(data_directory,"CollatedData.txt"),'r')
+    lines = f.readlines()
+    f.close()
+
+    HTL = []
+    conducting_HTL = []
+    full_line = []
+
+    print("Species, Eg, EA, IP")
+    for line in lines:
+        inp = line.split()
+        if inp[0] != "Species":
+            Eg = float(inp[1])
+            EA = float(inp[2])
+            IP = float(inp[3])
+            # Only consider candidates junction partners that are NOT also solar absorbers (i.e. wider band gap)
+            if Eg > 2.0:
+                if IP_ab - IP >= lowlim and IP_ab - IP <= uplim:
+                    HTL.append(inp[0])
+                    # Only add candidates to final list if band gap less than threshold considered as insulators
+                    if Eg < gap:
+                        conducting_HTL.append(inp[0])
+                        full_line.append(line)
+    return full_line
+
+# End of Suzy's additions ---------------------------------------------------------------------------------------------------------
+
+
+
 # We need a class "pair" which contains the information about a matching interface pair
 class Pair(object):
     """Class providing standard nformation on interface matching pairs."""

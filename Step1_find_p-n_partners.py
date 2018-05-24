@@ -71,9 +71,11 @@ if type == "p":
         CBO_spike_up = float(CBO_spike_up)
         CBO_spike_low = float(CBO_spike_low)
     write_slow("Searching candidates for spike CBO in range "+str(CBO_spike_low)+" to "+str(CBO_spike_up)+" eV...\n")
+    ETL = els.CBO_scan(EA, CBO_spike_low, CBO_spike_up, 3.0, output_file="CBO_spike_candidates.dat") 
+    print(ETL)
 
     print("")
-    print("Let's look a cliff CBO for your absorber!")
+    print("Let's look for a cliff CBO for your absorber!")
     print("Please enter a lower and upper limit for the CBO, otherwise default values of -0.3 and 0.0 eV will be used")
     print("(for a cliff CBO the lower limit should be negative and the upper limit should be zero or less)")
     CBO_lowlim = input("CBO lower limit = ")
@@ -85,7 +87,8 @@ if type == "p":
     CBO_lowlim = float(CBO_lowlim)
     CBO_uplim = float(CBO_uplim)
     write_slow("Searching for candidates for cliff CBO in range "+str(CBO_lowlim)+" to "+str(CBO_uplim)+" eV...\n")
-
+    ETL = els.CBO_scan(EA, CBO_lowlim, CBO_uplim, 3.0, output_file="CBO_cliff_candidates.dat") 
+    print(ETL)
 
 # Scanning just for VBO cliff offsets if absorber is n-type
 else:
@@ -102,14 +105,18 @@ else:
     VBO_lowlim = float(VBO_lowlim)
     VBO_uplim = float(VBO_uplim)
     write_slow("Searching for candidates cliff VBO in range "+str(VBO_lowlim)+" to "+str(VBO_uplim)+" eV...\n")
-    #HTL = els.energy_align(IP, EA, window_up=0.4, window_down=-0.1, gap=3.0)
+    HTL = els.VBO_scan(IP, VBO_lowlim, VBO_uplim, 3.0, output_file="VBO_cliff_candidates.dat") 
+    print(HTL)
+
 
 # Old code, scanning for offsets
 #ETL, HTL = els.energy_align(5.8, 4.3, window_up=0.4, window_down=-0.1, gap=3.0)
-
 #print(ETL)
+
+
 print("")
-write_slow("Now that you have your junction partner candidates...\n")
+print("Now that you have your junction partner candidates...\n")
 time.sleep(0.5)
 print("")
 print("Please find cif structure files for your candidates and move on to step 2 to find which junction partners should produce the least strain at the interface!\n")
+

@@ -129,13 +129,14 @@ def energy_align(ip_a, ea_a, window_up=0.4, window_down=0.1, gap=3.):
 
 # Extra functions for Suzy's workflow ---------------------------------------------------------------------------------------------
 
-def CBO_scan(EA_ab, lowlim, uplim, gap=3.):
+def CBO_scan(EA_ab, lowlim, uplim, gap, output_file):
     # Function to scan for CB offsets for p-type absorbers
     # Arguments: 
     ### electron affinity of absorber
     ### lower limit for offset
     ### upper limit for offset
     ### cut-off band gap (above which junction partner discounted as an insulator)
+    ### name of output file to store Eg, EA and IP of candidates
 
     # Reading in Eg, EA and IP of junction partner candidates
     f = open(os.path.join(data_directory,"CollatedData.txt"),'r')
@@ -144,9 +145,12 @@ def CBO_scan(EA_ab, lowlim, uplim, gap=3.):
 
     ETL = []
     conducting_ETL = []
-    full_line = []
 
-    print("Species, Eg, EA, IP")
+    outputs = open(output_file, "w")
+    outputs.write("Candidate Eg  EA  IP\n")
+    print("")
+    print("For Eg, EA and IP of junction partner candidates see "+str(output_file))
+    print("Your candidate junction partners are:\n")
     for line in lines:
         inp = line.split()
         if inp[0] != "Species":
@@ -160,18 +164,21 @@ def CBO_scan(EA_ab, lowlim, uplim, gap=3.):
                     # Only add candidates to final list if band gap less than threshold considered as insulators
                     if Eg < gap:
                         conducting_ETL.append(inp[0])
-                        full_line.append(line)
-    return full_line
+                        outputs.writelines( "%s  " % item for item in inp )
+                        outputs.write("\n")
+    outputs.close()
+    return conducting_ETL
 
 
 
-def VBO_scan(IP_ab, lowlim, uplim, gap=3.):
+def VBO_scan(IP_ab, lowlim, uplim, gap, output_file):
     # Function to scan for VB offsets for n-type absorbers
     # Arguments: 
     ### ionisation potential of absorber
     ### lower limit for offset
     ### upper limit for offset
     ### cut-off band gap (above which junction partner discounted as an insulator)
+    ### name of output file to store Eg, EA and IP of candidates
 
     # Reading in Eg, EA and IP of junction partner candidates
     f = open(os.path.join(data_directory,"CollatedData.txt"),'r')
@@ -181,8 +188,12 @@ def VBO_scan(IP_ab, lowlim, uplim, gap=3.):
     HTL = []
     conducting_HTL = []
     full_line = []
-
-    print("Species, Eg, EA, IP")
+    
+    outputs = open(output_file, "w")
+    outputs.write("Candidate Eg  EA  IP\n")
+    print("")
+    print("For Eg, EA and IP of junction partner candidates see "+str(output_file))
+    print("Your candidate junction partners are:\n")
     for line in lines:
         inp = line.split()
         if inp[0] != "Species":
@@ -196,8 +207,11 @@ def VBO_scan(IP_ab, lowlim, uplim, gap=3.):
                     # Only add candidates to final list if band gap less than threshold considered as insulators
                     if Eg < gap:
                         conducting_HTL.append(inp[0])
-                        full_line.append(line)
-    return full_line
+                        outputs.writelines( "%s  " % item for item in inp )
+                        outputs.write("\n")
+    outputs.close()
+    return conducting_HTL
+
 
 # End of Suzy's additions ---------------------------------------------------------------------------------------------------------
 

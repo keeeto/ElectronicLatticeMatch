@@ -30,7 +30,8 @@ def input_float(user_input):
 
 # Reading in user inputs required for matching of electronic bands of absorber to dataset of candidates junction partners
 print("")
-print("This script is step 1 for using ElectronLatticeMatch to search for candidate heterojunction partners for a solar cell absorber layer")
+print("This script is Step1 for using ElectronLatticeMatch to search for candidate heterojunction partners for a solar cell absorber layer")
+print("In this step, the ElectronLatticeMatch dataset is screened to find candidate materials based on the electronic band offsets with your absorber material")
 print("If you use this setup in any publications, please cite DOI: 10.1039/C5TC04091D")
 print("For original ElectronLatticeMatch git repo by Keith T. Butler, see here: https://github.com/keeeto/ElectronicLatticeMatch\n")
 print("Let's look for some junction partners!")
@@ -45,24 +46,39 @@ print("Is your absorber material p- or n-type? Enter either n or p.")
 print("(If you're not sure, run this script for each case in turn)")
 type = input("type = ")
 print("")
-print("We're now going to search through the ElectronLatticeMatch dataset to find candidate junction partners based on the electronic band offsets with your absorber material\n")
-time.sleep(1.0)
 
-# Scanning for CBO for p-type absorbers (spike and cliff if e- m* is below threshold, otherwise cliff only)
+# Scanning for cliff VBO (to establish junction) for p-type absorbers and then CBO (spike and cliff if e- m* is below threshold, otherwise cliff only)
 if type == "p":
-    print("You entered p-type for your absorber material")
-    print("Minority carriers are electrons, so we will match candidate junction partners to your absorber based on the CBO")
+    print("You entered p-type for your absorber material\n")
+    time.sleep(1.0)
+    # Setup for VBO screening (to establish junction for p-type)
+    print("We will first screen by the valence band offset (VBO)")
+    print("This is to find a partner to your absorber where we would expect a built-in voltage to develop to separate photoexcited electron-hole pairs")
+    print("To establish the built-in voltage we're looking for a cliff VBO to allow for majority carrier injection from the absorber into the partner (doi: 10.1016/S0040-6090(03)00583-2)")
+    print("We're going to use 0.0 to 0.3 as our range, if you're happy to use the default values just press enter, otherwise set custom limits")
+    VBO_lowlim = input("VBO lower limit = ")
+    VBO_uplim = input("VBO upper limit = ")
+    if VBO_lowlim == "":
+        VBO_lowlim = 0.0
+    if VBO_uplim == "":
+        VBO_uplim = 0.3
+    VBO_lowlim = float(VBO_lowlim)
+    VBO_uplim = float(VBO_uplim)    
+    # Setup for CBO screening (for transport of minority carriers across junction)
+    print("")
+    print("We will now screen by the conduction band offset (CBO)")
+    print("This offset is important for the transport of photoexcited minority carrier electrons across the junction")  
     print("")
     input("Press Enter to continue...\n")
     print("Some studies have suggested that spike-like offsets give defect-tolerance heterojunctions (doi: 10.1063/1.4953820)") 
     time.sleep(1.0)
-    print("But other studies have suggested that spike offsets provide too large of a barrier in minority carrier mobility is too low (doi: 10.1109/JPHOTOV.2017.2766522)")
+    print("But other studies have suggested that spike offsets provide too large of a barrier if minority carrier mobility is too low (doi: 10.1109/JPHOTOV.2017.2766522)")
     time.sleep(1.0)
     print("")
-    print("We would advise also looking for a spike CBO if minority carrier effective mass is < 0.5 m_e")
+    print("We would advise also looking for a spike CBO if minority carrier effective mass is < 0.5 m_e\n")
     time.sleep(1.0)
     print("Would you like to also look for a spike CBO?\n")
-    spike_check = input("Please type yes or no ")
+    spike_check = input("Please type yes or no \n")
     if spike_check == "yes":
         print("Let's first look for a spike CBO for your absorber!")
         print("Please enter a lower and upper limit for your spike CBO, otherwise defaults of 0.1 and 0.4 eV will be used")
@@ -75,10 +91,13 @@ if type == "p":
             CBO_spike_up = 0.4
         CBO_spike_up = float(CBO_spike_up)
         CBO_spike_low = float(CBO_spike_low)
+    print("")
     write_slow("Searching candidates for spike CBO in range "+str(CBO_spike_low)+" to "+str(CBO_spike_up)+" eV...\n")
-    ETL = els.CBO_scan(EA, CBO_spike_low, CBO_spike_up, 3.0, output_file="CBO_spike_candidates.dat") 
-    print(ETL)
-
+ #   ETL = els.CBO_scan(EA, CBO_spike_low, CBO_spike_up, 3.0, output_file="CBO_spike_candidates.dat") 
+ #   print(ETL)
+    partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_spike_low, CBO_spike_up, VBO_lowlim, VBO_uplim, output_file="CBO_spike_partners.dat")
+    print(partners)
+    print("Your candidate junction partners are also listed in CBO_spike_partners.dat")
     print("")
     print("Let's look for a cliff CBO for your absorber!")
     print("Please enter a lower and upper limit for the CBO, otherwise default values of -0.3 and 0.0 eV will be used")
@@ -91,14 +110,35 @@ if type == "p":
         CBO_uplim = 0.0
     CBO_lowlim = float(CBO_lowlim)
     CBO_uplim = float(CBO_uplim)
+    print("")
     write_slow("Searching for candidates for cliff CBO in range "+str(CBO_lowlim)+" to "+str(CBO_uplim)+" eV...\n")
-    ETL = els.CBO_scan(EA, CBO_lowlim, CBO_uplim, 3.0, output_file="CBO_cliff_candidates.dat") 
-    print(ETL)
+ #   ETL = els.CBO_scan(EA, CBO_lowlim, CBO_uplim, 3.0, output_file="CBO_cliff_candidates.dat") 
+ #   print(ETL)
+    partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_lowlim, CBO_uplim, VBO_lowlim, VBO_uplim, output_file="CBO_cliff_partners.dat")
+    print(partners)
+    print("Your candidate junction partners are also listed in CBO_cliff_partners.dat")
 
-# Scanning just for VBO cliff offsets if absorber is n-type
-else:
-    print("You entered n-type for your absorber material")
-    print("Minority carriers are holes, so we will match candidate junction partners to your absorber based on the VBO")
+# Scanning for cliff CBO to establish junction for n-type absorber and then VBO cliff offset only
+elif type =="n":
+    print("You entered n-type for your absorber material\n")
+    time.sleep(1.0)
+
+    # Setup for CBO screening (to establish junction for n-type)
+    print("We will first screen by the conduction band offset (CBO)")
+    print("This is to find a partner to your absorber where we would expect a built-in voltage to develop to separate photoexcited electron-hole pairs")
+    print("To establish the built-in voltage we're looking for a cliff CBO to allow for majority carrier injection from the absorber into the partner (doi: 10.1016/S0040-6090(03)00583-2)")
+    print("We're going to use -0.3 to 0.0 as our range, if you're happy to use the default values just press enter, otherwise set custom limits")
+    CBO_lowlim = input("CBO lower limit = ")
+    CBO_uplim = input("CBO upper limit = ")
+    if CBO_lowlim == "":
+        CBO_lowlim = -0.3
+    if CBO_uplim == "":
+        CBO_uplim = 0.0
+    CBO_lowlim = float(CBO_lowlim)
+    CBO_uplim = float(CBO_uplim)    
+    # Setup for VBO screening (for transport of minority carriers across junction)
+    print("We will now screen by the valence band offset (VBO)")
+    print("This offset is important for the transport of photoexcited minority carrier holes across the junction")
     print("Please enter a lower and upper limit for the VBO, otherwise default values of 0 and 0.3 eV will be used")
     print("(for a cliff VBO the lower limit should be 0 or larger and the upper limit should be positive)")
     VBO_lowlim = input("VBO lower limit = ")
@@ -109,19 +149,21 @@ else:
         VBO_uplim = 0.3
     VBO_lowlim = float(VBO_lowlim)
     VBO_uplim = float(VBO_uplim)
+    print("")
     write_slow("Searching for candidates cliff VBO in range "+str(VBO_lowlim)+" to "+str(VBO_uplim)+" eV...\n")
-    HTL = els.VBO_scan(IP, VBO_lowlim, VBO_uplim, 3.0, output_file="VBO_cliff_candidates.dat") 
-    print(HTL)
+ #   HTL = els.VBO_scan(IP, VBO_lowlim, VBO_uplim, 3.0, output_file="VBO_cliff_candidates.dat") 
+ #   print(HTL)
+    partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_lowlim, CBO_uplim, VBO_lowlim, VBO_uplim, output_file="VBO_cliff_partners.dat")
+    print(partners)
+    print("Your candidate junction partners are also listed in VBO_cliff_partners.dat")
 
-
-# Old code, scanning for offsets
-#ETL, HTL = els.energy_align(5.8, 4.3, window_up=0.4, window_down=-0.1, gap=3.0)
-#print(ETL)
+else:
+    print("Sorry. I think that was a typo. Please start again :(")
 
 
 print("")
 print("Now that you have your junction partner candidates...\n")
-time.sleep(0.5)
+time.sleep(1.0)
 print("")
-print("Please find cif structure files for your candidates and move on to step 2 to find which junction partners should produce the least strain at the interface!\n")
+print("Please find cif structure files for your candidates and move on to Step2 to find which junction partners should produce the least strain at the interface!\n")
 

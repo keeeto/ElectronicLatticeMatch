@@ -213,6 +213,48 @@ def VBO_scan(IP_ab, lowlim, uplim, gap, output_file):
     return conducting_HTL
 
 
+def CBOandVBO_scan(EA_ab, IP_ab, gap, CBO_lowlim, CBO_uplim, VBO_lowlim, VBO_uplim, output_file):
+    # Function to scan for CB offsets for p-type absorbers
+    # Arguments: 
+    ### EA_ab = electron affinity of absorber
+    ### IP_ab = ionisation potential of absorber
+    ### gap = cut-off band gap (above which junction partner discounted as an insulator)
+    ### CBO_lowlim and CBO_uplim = lower and upper limits for conduction band offset between absorber and candidate junction partner
+    ### VBO_lowlim and VBO_uplim = lower and upper limits for valence band offset between absorber and candidate junction partner
+    ### name of output file to store Eg, EA and IP of candidates
+
+    # Reading in Eg, EA and IP of junction partner candidates
+    f = open(os.path.join(data_directory,"CollatedData.txt"),'r')
+    lines = f.readlines()
+    f.close()
+
+    partners = []
+    conducting_partners = []
+
+    outputs = open(output_file, "w")
+    outputs.write("Candidate Eg  EA  IP\n")
+    print("")
+    print("For Eg, EA and IP of junction partner candidates see "+str(output_file))
+    print("Your candidate junction partners are:\n")
+    for line in lines:
+        inp = line.split()
+        if inp[0] != "Species":
+            Eg = float(inp[1])
+            EA = float(inp[2])
+            IP = float(inp[3])
+            # Only consider candidates junction partners that are NOT also solar absorbers (i.e. wider band gap)
+            if Eg > 2.0:
+                if EA_ab - EA >= CBO_lowlim and EA_ab - EA <= CBO_uplim and IP_ab - IP >= VBO_lowlim and IP_ab - IP <= VBO_uplim:
+                    partners.append(inp[0])
+                    # Only add candidates to final list if band gap less than threshold considered as insulators
+                    if Eg < gap:
+                        conducting_partners.append(inp[0])
+                        outputs.writelines( "%s  " % item for item in inp )
+                        outputs.write("\n")
+    outputs.close()
+    return conducting_partners
+
+
 # End of Suzy's additions ---------------------------------------------------------------------------------------------------------
 
 

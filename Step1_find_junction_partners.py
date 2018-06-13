@@ -26,6 +26,9 @@ def write_slow(text_line):
 # Function to read user input as float (instead of default string)
 def input_float(user_input):
     return float(input(user_input))
+# Function to read user input as int (instead of default string)
+def input_int(user_input):
+    return int(input(user_input))
 
 def main():
     # Reading in user inputs required for matching of electronic bands of absorber to dataset of candidates junction partners
@@ -96,9 +99,8 @@ def main():
         write_slow("Searching candidates for spike CBO in range "+str(CBO_spike_low)+" to "+str(CBO_spike_up)+" eV...\n")
     #   ETL = els.CBO_scan(EA, CBO_spike_low, CBO_spike_up, 3.0, output_file="CBO_spike_candidates.dat") 
     #   print(ETL)
-        partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_spike_low, CBO_spike_up, VBO_lowlim, VBO_uplim, output_file="CBO_spike_partners.dat")
+        partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_spike_low, CBO_spike_up, VBO_lowlim, VBO_uplim, output_file="Step1_CBO_spike_partners.dat")
         print(partners)
-        print("Your candidate junction partners are also listed in CBO_spike_partners.dat")
         print("")
         print("Let's look for a cliff CBO for your absorber!")
         print("Please enter a lower and upper limit for the CBO, otherwise default values of -0.3 and 0.0 eV will be used")
@@ -115,9 +117,8 @@ def main():
         write_slow("Searching for candidates for cliff CBO in range "+str(CBO_lowlim)+" to "+str(CBO_uplim)+" eV...\n")
     #   ETL = els.CBO_scan(EA, CBO_lowlim, CBO_uplim, 3.0, output_file="CBO_cliff_candidates.dat") 
     #   print(ETL)
-        partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_lowlim, CBO_uplim, VBO_lowlim, VBO_uplim, output_file="CBO_cliff_partners.dat")
+        partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_lowlim, CBO_uplim, VBO_lowlim, VBO_uplim, output_file="Step1_CBO_cliff_partners.dat")
         print(partners)
-        print("Your candidate junction partners are also listed in CBO_cliff_partners.dat")
 
     # Scanning for cliff CBO to establish junction for n-type absorber and then VBO cliff offset only
     elif type =="n":
@@ -154,9 +155,8 @@ def main():
         write_slow("Searching for candidates cliff VBO in range "+str(VBO_lowlim)+" to "+str(VBO_uplim)+" eV...\n")
     #   HTL = els.VBO_scan(IP, VBO_lowlim, VBO_uplim, 3.0, output_file="VBO_cliff_candidates.dat") 
     #   print(HTL)
-        partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_lowlim, CBO_uplim, VBO_lowlim, VBO_uplim, output_file="VBO_cliff_partners.dat")
+        partners = els.CBOandVBO_scan(EA, IP, 3.0, CBO_lowlim, CBO_uplim, VBO_lowlim, VBO_uplim, output_file="Step1_VBO_cliff_partners.dat")
         print(partners)
-        print("Your candidate junction partners are also listed in VBO_cliff_partners.dat")
 
     else:
         print("Sorry. I think that was a typo. Please start again :(")
@@ -166,7 +166,7 @@ def main():
     print("Now that you have your junction partner candidates...\n")
     time.sleep(1.0)
     print("")
-    print("Please find cif structure files for your candidates and move on to Step2 to find which junction partners should produce the least strain at the interface!\n")
+    print("Please find cif structure files for your candidates, put them into a directory called candidates, and move on to Step2 to find which junction partners should produce the least strain at the interface!\n")
 
 if __name__ == '__main__':
     main()

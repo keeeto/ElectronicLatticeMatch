@@ -50,7 +50,9 @@ def main():
                         outputs.write(") ")
                         outputs.writelines(str(sc_ab)+" ")
                         outputs.writelines(str(sc_part)+" ")
-                        outputs.writelines(str(strains)+" ")
+                        outputs.write(str(strains[0])+" ")
+                        outputs.write(str(strains[1])+" ")
+                        outputs.write(str(strains[2])+" ")
                         outputs.write("\n")
 
     outputs.close()

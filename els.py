@@ -164,7 +164,7 @@ def CBO_scan(EA_ab, lowlim, uplim, gap, output_file):
                     # Only add candidates to final list if band gap less than threshold considered as insulators
                     if Eg < gap:
                         conducting_ETL.append(inp[0])
-                        outputs.writelines( "%s  " % item for item in inp )
+                        outputs.writelines( "%s " % item for item in inp )
                         outputs.write("\n")
     outputs.close()
     return conducting_ETL
@@ -207,7 +207,7 @@ def VBO_scan(IP_ab, lowlim, uplim, gap, output_file):
                     # Only add candidates to final list if band gap less than threshold considered as insulators
                     if Eg < gap:
                         conducting_HTL.append(inp[0])
-                        outputs.writelines( "%s  " % item for item in inp )
+                        outputs.writelines( "%s " % item for item in inp )
                         outputs.write("\n")
     outputs.close()
     return conducting_HTL
@@ -249,7 +249,7 @@ def CBOandVBO_scan(EA_ab, IP_ab, gap, CBO_lowlim, CBO_uplim, VBO_lowlim, VBO_upl
                     # Only add candidates to final list if band gap less than threshold considered as insulators
                     if Eg < gap:
                         conducting_partners.append(inp[0])
-                        outputs.writelines( "%s  " % item for item in inp )
+                        outputs.writelines( "%s " % item for item in inp )
                         outputs.write("\n")
     outputs.close()
     return conducting_partners

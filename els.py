@@ -129,7 +129,7 @@ def energy_align(ip_a, ea_a, window_up=0.4, window_down=0.1, gap=3.):
 
 # Extra functions for Suzy's workflow ---------------------------------------------------------------------------------------------
 
-def CBO_scan(EA_ab, lowlim, uplim, gap, output_file):
+def CBO_scan(EA_ab, gap, lowlim, uplim, output_file):
     # Function to scan for CB offsets for p-type absorbers
     # Arguments: 
     ### electron affinity of absorber
@@ -171,7 +171,7 @@ def CBO_scan(EA_ab, lowlim, uplim, gap, output_file):
 
 
 
-def VBO_scan(IP_ab, lowlim, uplim, gap, output_file):
+def VBO_scan(IP_ab, gap, lowlim, uplim, output_file):
     # Function to scan for VB offsets for n-type absorbers
     # Arguments: 
     ### ionisation potential of absorber

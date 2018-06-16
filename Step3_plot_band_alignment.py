@@ -5,30 +5,31 @@ import os.path
 import numpy as np
 
 print("")
-print("step3 uses the bapt package to generate band alignment plots from candidate junction partners identified with els")
-print("please ensure output files from step1 and step2 are in the current directory")
-print("before continuing, please follow installation steps for bapt found here: https://github.com/utf/bapt")
-input("press enter to continue...\n")
+print("Step3 uses the bapt package to generate band alignment plots from candidate junction partners identified with els")
+print("Please ensure output files from step1 and step2 are in the current directory")
+print("Before continuing, please follow installation steps for bapt found here: https://github.com/utf/bapt")
+input("Press enter to continue...\n")
 
-print("we will now plot band alignments for your absorber using the minimum strain candidates identified in step2")
-print("this script will generate a config file for bapt called bapt_input.yaml based on the information you provide")
-# ask user for absorber layer info
-ab_name = input("please enter the name of your absorber: ")
-ab_term = input("please enter the surface termination of your absorber: ")
-ab_eg = input_float("please enter the band gap of your absorber again: ")
-ab_ip = input_float("please enter the IP of your absorber again: ")
+print("We will now plot band alignments for your absorber using the minimum strain candidates identified in step2")
+print("This script will generate a config file for bapt called bapt_input.yaml based on the information you provide")
+# Ask user for absorber layer info
+ab_name = input("Please enter the name of your absorber: ")
+ab_term = input("Please enter the surface termination of your absorber: ")
+ab_eg = input_float("Please enter the band gap of your absorber again: ")
+ab_ip = input_float("Please enter the IP of your absorber again: ")
 ab_ea = ab_ip - ab_eg
 ab_ea = '{0:.2f}'.format(ab_ea)
 ab_type = input("Sorry I forgot, was your absorber p- or n-type? (please enter p or n): ")
-if ab_type == "p":
-    cbo = input("is this plot for a cliff or a spike offset? (enter cliff or spike): ")
+offset = input("Is this plot for a cliff or a spike offset? (enter cliff or spike): ")
 # determine output file name from step1
-if ab_type == "p" and cbo == "spike":
-    step1_file = "step1_cbo_spike_partners.dat"
-elif ab_type == "p" and cbo == "cliff":
-    step1_file = "step1_cbo_cliff_partners.dat"
-elif ab_type == "n":
-    step1_file = "step1_vbo_cliff_partners.dat"
+if ab_type == "p" and offset == "spike":
+    step1_file = "Step1_CBO_spike_partners.dat"
+elif ab_type == "p" and offset == "cliff":
+    step1_file = "Step1_CBO_cliff_partners.dat"
+elif ab_type == "n" and offset == "spike":
+    step1_file = "Step1_VBO_spike_partners.dat"
+elif ab_type == "n" and offset == "cliff":
+    step1_file = "Step1_VBO_cliff_partners.dat"
 else:
     print("sorry, looks like there's been a typo! please start again :(")
 # use python os lib to check step1 file is in this dir
@@ -41,7 +42,7 @@ candidates_tot = input_int("how many candidate junction partners were you left w
 for i in range(0, candidates_tot):
      candidates.append(input("please enter the name of each candidate (one at a time): "))
 for candidate in candidates:
-    step2_file = "step2_"+candidate+".dat"
+    step2_file = "Step2_"+candidate+".dat"
     # use python os lib to check step2 files are in this dir
     if not os.path.isfile(step2_file):
         print("uh oh, looks like you're missing the output file from step2: "+step2_file)
@@ -65,7 +66,7 @@ for candidate in candidates:
            Eg_part = step1_data[i][1] 
            EA_part = step1_data[i][2] 
            IP_part = step1_data[i][3]  
-    step2_file = "step2_"+candidate+".dat"
+    step2_file = "Step2_"+candidate+".dat"
     strain_data =np.genfromtxt(step2_file, dtype='U', skip_header=1)
     # Setting initial values for av_strain and min strain termination as first line of Step2 output file
     xstrain = float(strain_data[0][6])
@@ -96,7 +97,7 @@ config_file.write("      ea: "+str(ab_ea)+"\n")
 config_file.write("      ip: "+str(ab_ip)+"\n")
 config_file.write("      gradient: 0, 0"+"\n")
 
-candidates_data = np.genfromtxt("step3_final_candidates.dat", dtype='U', skip_header=1)
+candidates_data = np.genfromtxt("Step3_final_candidates.dat", dtype='U', skip_header=1)
 # First loop over step3 file to determine min strain candidate
 min_strain = candidates_data[0][5] #Setting first strain as initial min val 
 min_strain_candidate = candidates_data[0][0] 

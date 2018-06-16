@@ -31,24 +31,24 @@ elif ab_type == "n" and offset == "spike":
 elif ab_type == "n" and offset == "cliff":
     step1_file = "Step1_VBO_cliff_partners.dat"
 else:
-    print("sorry, looks like there's been a typo! please start again :(")
+    print("Sorry, looks like there's been a typo! please start again :(")
 # use python os lib to check step1 file is in this dir
 if not os.path.isfile(step1_file):
-    print("uh oh, looks like you're missing the output file from step1!")
-    print("please add it to this directory and start again.")
+    print("Uh oh, looks like you're missing the output file from step1!")
+    print("Please add it to this directory and start again.")
 # ask user for final candidates from step1 and step2
 candidates = []
-candidates_tot = input_int("how many candidate junction partners were you left with after step2?: ")
+candidates_tot = input_int("How many candidate junction partners were you left with after step2?: ")
 for i in range(0, candidates_tot):
-     candidates.append(input("please enter the name of each candidate (one at a time): "))
+     candidates.append(input("Please enter the name of each candidate (one at a time): "))
 for candidate in candidates:
     step2_file = "Step2_"+candidate+".dat"
     # use python os lib to check step2 files are in this dir
     if not os.path.isfile(step2_file):
-        print("uh oh, looks like you're missing the output file from step2: "+step2_file)
-        print("please add it to this directory and start again.")
-
-print("we will now read in information on your junction partner candidates from output files step1 and step2 to generate your config file for bapt...")
+        print("Uh oh, looks like you're missing the output file from step2: "+step2_file)
+        print("Please add it to this directory and start again.")
+print("")
+print("We will now read in information on your junction partner candidates from output files step1 and step2 to generate your config file for bapt...")
 print("(just so you know, we take the termination of the candidate from step2 with the minimum strain then average the x-, y- components when we compare the strain for different candidates)")
 
 
@@ -134,7 +134,7 @@ elif ab_type == "n":
     config_file.write("      start: '#ffffff'\n")
     config_file.write("      end: '#ad2020'\n")
 else:
-    print("looks like you didn't enter n or p for your absorber conductivity type :( please start again.")
+    print("Looks like you didn't enter n or p for your absorber conductivity type :( please start again.")
 config_file.write("\n")
 # settings at the end of bapt config file
 config_file.write("settings:\n")
@@ -146,10 +146,10 @@ config_file.write("    show_axis: true\n")
 config_file.close()
 
 print("")
-print("now just use bapt on the command line to generate your plot with the command: bapt --filename bapt_input.yaml")
+print("Now just use bapt on the command line to generate your plot with the command: bapt --filename bapt_input.yaml")
 print("")
-print("this will generate a plot called alignment.pdf")
+print("This will generate a plot called alignment.pdf")
 print("p-type absorbers are coloured red, n-type absorbers are coloured blue and the minimum strain candidate junction partner is the boldest colour.")
-print("we've also summarised the info on the candidates from step1 and 2 into the file 'step3_final_candidates.dat")
-print("enjoy!")
+print("We've also summarised the info on the candidates from step1 and 2 into the file 'step3_final_candidates.dat")
+print("Enjoy!")
 print("")

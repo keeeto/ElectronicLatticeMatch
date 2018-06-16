@@ -6,7 +6,7 @@ from Step1_find_junction_partners import write_slow, input_int, input_float
 
 def main():
     print("")
-    print("Hello, this is Step2 for using ELS to find candidate heterojunction partners for your absorber material!")
+    print("Hello, this is Step2 for using ELS to find candidate heterojunction partners for your absorber material with minimal interface strain.")
     print("This step is based on methodology in doi: 10.1063/1.333084")
     print("Please ensure you have a cif file for the bulk structure of your absorber material in this directory.")
     print("Please also add cif files for the bulk structures of all of your candidate junction partners from Step1 into a directory called candidates.")

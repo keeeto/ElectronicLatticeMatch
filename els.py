@@ -202,7 +202,7 @@ def VBO_scan(IP_ab, gap, lowlim, uplim, output_file):
             IP = float(inp[3])
             # Only consider candidates junction partners that are NOT also solar absorbers (i.e. wider band gap)
             if Eg > 2.0:
-                if IP_ab - IP >= lowlim and IP_ab - IP <= uplim:
+                if IP - IP_ab >= lowlim and IP - IP_ab <= uplim:
                     HTL.append(inp[0])
                     # Only add candidates to final list if band gap less than threshold considered as insulators
                     if Eg < gap:

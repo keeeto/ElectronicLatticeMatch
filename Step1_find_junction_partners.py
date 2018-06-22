@@ -38,7 +38,7 @@ def main():
     print("If you use this setup in any publications, please cite DOI: 10.1039/C5TC04091D")
     print("For original ElectronLatticeMatch git repo by Keith T. Butler, see here: https://github.com/keeeto/ElectronicLatticeMatch\n")
     print("Let's look for some junction partners!")
-    print("It's best to have a separate directory with a copy of the Step1-3 scripts for each absorber material and each slab termination you're investgating")
+    print("It's best to have a separate directory with a copy of the ELS repo and Step1-3 scripts for this workflow for each absorber material and each slab termination you're investigating")
     print("It's nice to keep things tidy")
     input("Press Enter to continue...\n")
     # Ask user for absorber layer info

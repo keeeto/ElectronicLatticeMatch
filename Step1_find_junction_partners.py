@@ -74,14 +74,14 @@ def main():
         input("Press Enter to continue...\n")
         if spike_check == "yes":
             print("Let's first look for a spike CBO for your absorber!")
-            print("Please enter a lower and upper limit for your spike CBO, otherwise defaults of 0.1 and 0.4 eV will be used")
+            print("Please enter a lower and upper limit for your spike CBO, otherwise defaults of 0.1 and 0.3 eV will be used")
             print("0.1 to 0.3 eV has been suggested to be optimal for CdTe (doi: 10.1063/1.4953820)")
             CBO_spike_low = input("CBO spike lower limit = ")
             CBO_spike_up = input("CBO spike upper limit = ")
             if CBO_spike_low == "":
                 CBO_spike_low = 0.1
             if CBO_spike_up == "":
-                CBO_spike_up = 0.4
+                CBO_spike_up = 0.3
             CBO_spike_up = float(CBO_spike_up)
             CBO_spike_low = float(CBO_spike_low)
             print("")
@@ -116,14 +116,14 @@ def main():
         input("Press Enter to continue...\n")
         if spike_check == "yes":
             print("Let's first look for a spike VBO for your absorber!")
-            print("Please enter a lower and upper limit for your spike VBO, otherwise defaults of 0.1 and 0.4 eV will be used")
+            print("Please enter a lower and upper limit for your spike VBO, otherwise defaults of 0.1 and 0.3 eV will be used")
             print("0.1 to 0.3 eV has been suggested to be optimal for CdTe (doi: 10.1063/1.4953820)")
             VBO_spike_low = input("VBO spike lower limit = ")
             VBO_spike_up = input("VBO spike upper limit = ")
             if VBO_spike_low == "":
                 VBO_spike_low = 0.1
             if VBO_spike_up == "":
-                VBO_spike_up = 0.4
+                VBO_spike_up = 0.3
             VBO_spike_up = float(VBO_spike_up)
             VBO_spike_low = float(VBO_spike_low)
             print("")

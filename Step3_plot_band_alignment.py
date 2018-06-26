@@ -1,6 +1,6 @@
 #### This script uses python3 ####
 
-from Step1_find_junction_partners import input_float, input_int
+from Step1_find_junction_partners import input_float, input_int, file_len
 import os.path
 import numpy as np
 
@@ -56,12 +56,14 @@ print("(just so you know, we take the termination of the candidate from step2 wi
 step3_file = open("step3_final_candidates.dat", "w")
 step3_file.write("Candidate, Eg, EA,  IP, Min. strain terms.,  Av. strain\n")
 
+# Count lines in Step1 output file to loop over
+Step1_loop = file_len(step1_file)
 # Reading in data from Step1
 # [rows][cols] and col0=Candidate, col1=Eg, col2=EA, col3=IP, reading all in as str
 step1_data = np.genfromtxt(step1_file, dtype='U', skip_header=1)
 for candidate in candidates:
     # Loop over step1_file rows and set Eg, EA and Ip to write to step3_file
-    for i in range(0,len(candidates)):
+    for i in range(0,Step1_loop):
         if step1_data[i][0] == candidate:
            Eg_part = step1_data[i][1] 
            EA_part = step1_data[i][2] 

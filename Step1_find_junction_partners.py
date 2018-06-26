@@ -17,6 +17,13 @@ import els as els
 import sys
 import time
 
+# Function to count lines in a file
+def file_len(fname):
+    with open(fname) as f:
+        for i, l in enumerate(f):
+            pass
+    return i + 1
+
 # Function to write line of text letter by letter
 def write_slow(text_line):
     for char in text_line:

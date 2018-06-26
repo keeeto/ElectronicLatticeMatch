@@ -63,7 +63,7 @@ Step1_loop = file_len(step1_file)
 step1_data = np.genfromtxt(step1_file, dtype='U', skip_header=1)
 for candidate in candidates:
     # Loop over step1_file rows and set Eg, EA and Ip to write to step3_file
-    for i in range(0,Step1_loop):
+    for i in range(0,Step1_loop-1):
         if step1_data[i][0] == candidate:
            Eg_part = step1_data[i][1] 
            EA_part = step1_data[i][2] 
@@ -71,20 +71,32 @@ for candidate in candidates:
     step2_file = "Step2_"+candidate+".dat"
     strain_data =np.genfromtxt(step2_file, dtype='U', skip_header=1)
     # Setting initial values for av_strain and min strain termination as first line of Step2 output file
-    xstrain = float(strain_data[0][6])
-    ystrain = float(strain_data[0][7])
-    av_strain = (xstrain+ystrain)/2
-    term_part = strain_data[0][1] 
-    # Compare all subsequent lines to first to determine termination with min av strain
-    for j in range(1,len(strain_data)):
-        xstrain = float(strain_data[j][6])
-        ystrain = float(strain_data[j][7])
-        new_av_strain = (xstrain+ystrain)/2
-        if new_av_strain < av_strain:
-            av_strain = new_av_strain
-            term_part = strain_data[j][1]
-        if new_av_strain == av_strain:
-            term_part = term_part+","+strain_data[j][1]
+    # Alternative read-in if more than two lines (2D array)
+    if (file_len(step2_file) > 2 ):
+        xstrain = float(strain_data[0][6])
+        ystrain = float(strain_data[0][7])
+        av_strain = (xstrain+ystrain)/2
+        term_part = strain_data[0][1] 
+        # Compare all subsequent lines to first to determine termination with min av strain
+        # Only compare if there is more than termination option in Step2 output file (i.e more than 2 lines in file)
+        for j in range(1,len(strain_data)):
+            xstrain = float(strain_data[j][6])
+            ystrain = float(strain_data[j][7])
+            new_av_strain = (xstrain+ystrain)/2
+            if new_av_strain < av_strain:
+                av_strain = new_av_strain
+                term_part = strain_data[j][1]
+            if new_av_strain == av_strain:
+                term_part = term_part+","+strain_data[j][1]
+    # If only 1 option in Step2 output file
+    elif (file_len(step2_file) == 2 ):
+        xstrain = float(strain_data[6])
+        ystrain = float(strain_data[7])
+        av_strain = (xstrain+ystrain)/2
+        term_part = strain_data[0][1] 
+    else:
+        print("Uh oh, error reading in the outputs from the Step2 output file for "+str(candidate))
+
     # Write info from Step1 and Step2 to new line of Step3 file
     step3_file.write(candidate+" "+Eg_part+" "+EA_part+" "+IP_part+" "+term_part+" "+str(av_strain)+"\n")
 step3_file.close()

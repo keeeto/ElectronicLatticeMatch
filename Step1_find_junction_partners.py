@@ -46,7 +46,8 @@ def main():
     print("For original ElectronLatticeMatch git repo by Keith T. Butler, see here: https://github.com/keeeto/ElectronicLatticeMatch\n")
     print("Let's look for some junction partners!")
     print("It's best to have a separate directory with a copy of the ELS repo and Step1-3 scripts for this workflow for each absorber material and each slab termination you're investigating")
-    print("It's nice to keep things tidy")
+    print("It's nice to keep things tidy\n")
+    print("If you make a typo and need to start again or just want to exit the script early, use `ctrl-c'\n")
     input("Press Enter to continue...\n")
     # Ask user for absorber layer info
     print("Please enter the ionisation potential (IP) of your absorber material")

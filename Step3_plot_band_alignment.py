@@ -7,7 +7,8 @@ import numpy as np
 print("")
 print("Step3 uses the bapt package to generate band alignment plots from candidate junction partners identified with els")
 print("Please ensure output files from step1 and step2 are in the current directory")
-print("Before continuing, please follow installation steps for bapt found here: https://github.com/utf/bapt")
+print("Before continuing, please follow installation steps for bapt found here: https://github.com/utf/bapt\n")
+print("If you make a typo and need to start again or just want to exit the script early, use 'ctrl-c'\n")
 input("Press enter to continue...\n")
 
 print("We will now plot band alignments for your absorber using the minimum strain candidates identified in step2")

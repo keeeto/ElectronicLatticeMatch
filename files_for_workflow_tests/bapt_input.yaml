@@ -1,0 +1,28 @@
+compounds:
+    - name: "CZTS\n(100)" 
+      ea: 3.90
+      ip: 5.4
+      gradient: 0, 0
+    - name: Cu2O
+      ea: 3.56
+      ip: 5.66
+      gradient: 1, 1
+    - name: Ce2S3
+      ea: 3.59
+      ip: 5.69
+      gradient: 1, 1
+      fade: true
+
+gradients:
+    - id: 0
+      start: '#ffffff'
+      end: '#2555a8'
+    - id: 1
+      start: '#ffffff'
+      end: '#ad2020'
+
+settings:
+    name_colour: 'k'
+    fade_cb: true
+    show_ea: true
+    show_axis: true
